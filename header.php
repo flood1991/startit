@@ -24,16 +24,24 @@
                 <div class="container">
                     <nav id="flexmenu">
                         <div class="logo">
-                            <a href="index.html"><?php the_custom_logo()?></a>
+                        <?php
+                            $logo = get_field('logo_head', 'option');
+                            if( !empty($logo) ):
+                        ?>
+                            <a href="#"><img src="<?php echo $logo['url']; ?>" alt="<?php echo $logo['alt']; ?>"></a>
+                        <?php
+                            endif;
+                        ?>
                         </div>
                         <div class="nav-inner">
                             <div id="mobile-toggle" class="mobile-btn"></div>
                             <?php 
-                            wp_nav_menu(array(
-                                'theme_location' => 'head',
-                                'container_class' => 'nav-inner',
-                                'menu_class' => 'main-menu'
-                            )); ?>
+                                wp_nav_menu(array(
+                                    'theme_location' => 'head',
+                                    'container_class' => 'nav-inner',
+                                    'menu_class' => 'main-menu'
+                                )); 
+                            ?>
                         </div>
                     </nav>
                 </div>

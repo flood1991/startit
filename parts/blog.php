@@ -1,35 +1,37 @@
 <section id="blog" class="blog">
                 <div class="container">
-
                     <div class="section-title">
-                        <?php while ( have_posts() ) : the_post(); ?>
                         <h2><?php the_field('blog_title'); ?></h2>
                         <p><?php the_field('blog_titletext'); ?></p>
-                        <?php endwhile; ?>
                     </div>
                     <div class="row">
-                        <?php if( have_rows('blog_repeater') ):
-while ( have_rows('blog_repeater') ) : the_row();
-   $title = get_sub_field('blog_posttitle');
-    $link = get_sub_field('blog_link');
-    $image = get_sub_field('blog_image');  
-?>
+                    <?php 
+                        $blog = get_posts(
+                            array('numberposts' => 3,
+                            'orderby' => 'id',
+                            'order' => 'ASC' ));    
+                        foreach( $blog as $post ){
+                        setup_postdata($post);
+                    ?>
                         <div class="col-md-6 col-lg-4">
                             <div class="blog_post">
                                 <div class="post_img">
-                                    <a href="#"><img src="<?php echo $image; ?>" alt="img"></a>
+                                    <a href="#"><?php the_post_thumbnail('blog-images'); ?></a>
                                 </div>
                                 <div class="post_content">
                                     <div class="post_header">
-                                        <h2 class="post_title"><a href="#"><?php echo $title; ?></a></h2>
-                                        <div class="read_more"><a href="#"><?php echo $link; ?></a></div>
+                                        <h2 class="post_title"><a href="#"><?php the_title();?></a></h2>
+                                        <div class="read_more"><a href="#"><?php the_content();?></a></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-<?php endwhile; ?>     
-<?php else:
-endif; ?>                 
+                    <?php 
+                        } 
+                    wp_reset_postdata();?>
                     </div>
                 </div>
             </section>
+
+
+         
