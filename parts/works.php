@@ -36,7 +36,7 @@
                                     </div>
                                     <div class="works-info">
                                         <div class="label-text">
-                                            <h4><?php the_title();?></h4>
+                                            <h4><a href="<?php the_permalink(); ?>"><?php the_title();?></a></h4>
                                         </div>
                                     </div>
                                 </div>

@@ -18,7 +18,7 @@
                         <div class="servicebox">
                             <div class="srv_desc">
                                 <h5 class="count"><?php echo wp_sprintf('%02d',$count) ; ?></h5>
-                                <h4><a href="#"><?php the_title() ?></a></h4>
+                                <h4><a href="<?php the_permalink(); ?>"><?php the_title() ?></a></h4>
                                 <p><?php the_excerpt();?></p>
                             </div>
                         </div>
