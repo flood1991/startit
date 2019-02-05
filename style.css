@@ -33,13 +33,13 @@
 @import url('fonts/font-awesome/css/font-awesome.css');
 @import url('fonts/ionicons/css/ionicon.css');
 
-
 @import url('bootstrap.css');
 @import url('menu.css');
 @import url('owl.carousel.css');
 @import url('owl.theme.default.css');
 @import url('jquery.fancybox.css');
 @import url('animate.css');
+
 @font-face {
     font-family: 'GT Walsheim Bold';
     src: url('fonts/GT Walsheim Bold.otf');
@@ -498,7 +498,7 @@ img{
     position: absolute;
     top: 0;
     left: 0;
-    background: url("wp-content/themes/startit/images/left-layer.png");
+    background: url("../images/left-layer.png");
     background-position: left;
     background-size: auto;
     background-repeat: no-repeat;
@@ -512,7 +512,7 @@ img{
     position: absolute;
     top: 0;
     right: 0;
-    background: url("wp-content/themes/startit/images/right-layer.png");
+    background: url("../images/right-layer.png");
     background-position: right;
     background-size: auto;
     background-repeat: no-repeat;
@@ -1090,7 +1090,7 @@ ul#filters li{
     position: absolute;
     top: 53%;
     left: 50%;
-    background: url('wp-content/themes/startit/images/testi-icon.png');
+    background: url('../images/testi-icon.png');
     width: 130px;
     height: 100px;
     z-index: -1;

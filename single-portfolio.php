@@ -1,17 +1,20 @@
 <?php get_header('main');?>
-
+<?php 
+ if( have_posts() ):
+     
+     while( have_posts() ): the_post(); ?>
         <div class="main-wrapper">
             <section class="inner-page">
                 <div class="container">
                     <div class="singlepage-details-content">
                         <div class="portfolio-details-img">
-                            <img src="<?php the_field('portfolio-details'); ?>" alt="img">
+                            <?php the_post_thumbnail('portfolio_top')?>
                         </div>
                         <div class="portfolio-details">
                             <div class="full_content">
                                 <h6>Lorem ipsum dolor sit</h6>
-                                <h2 class="project_title"><?php the_field('portfolio-title'); ?></h2>
-                                <p><?php the_field('portfolio-text'); ?></p>
+                                <h2 class="project_title"><?php the_title()?></h2>
+                                <?php the_content(); ?>
                             </div>
                             <div class="portfolio-content-img">
                                 <img src="<?php the_field('portfolio-textimage'); ?>" alt="img">
@@ -20,7 +23,7 @@
                     </div>
                 </div>
             </section>
-
+            <?php endwhile; endif?>
             <section class="video-banner">
                 <div class="container">
                     <div class="video-content"><?php the_field('video-titleleft'); ?> <span class="video_btn"><a class="fancybox-media" href="<?php the_field('video-link'); ?>"><i class="ion-ios-play"></i></a></span><?php the_field('video-titleright'); ?></div>

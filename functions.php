@@ -5,6 +5,9 @@ function startit_setup() {
 		add_theme_support ('custom-logo');
 		add_theme_support ('post-thumbnails');
 		add_image_size ('blog-images', 360, 272.42, true);
+		add_image_size ('prevnext', 150, 113.5, true);
+		add_image_size ('portfolio_top', 1140, 531, true);
+		add_image_size ('postimg', 750, 567.56, true);
 		add_image_size ('portfolio-images', 262.5, 262.5, true);
 		add_image_size ('about-small-img', 262.5, 267.27, true);
 		add_image_size ('about-big-img', 480, 285.95, true);
@@ -12,7 +15,6 @@ function startit_setup() {
 }
 add_action('after_setup_theme','startit_setup');
 function startit_scripts() {
-	
 	wp_enqueue_style( 'bootstrap', get_template_directory_uri(). '/css/bootstrap.css' );
 	wp_enqueue_style( 'animate', get_template_directory_uri(). '/css/animate.css' );
 	wp_enqueue_style( 'menu', get_template_directory_uri(). '/css/menu.css' );
@@ -21,11 +23,10 @@ function startit_scripts() {
 	wp_enqueue_style( 'jquery.fancybox', get_template_directory_uri(). '/css/jquery.fancybox.css' );
 	wp_enqueue_style( 'style-css', get_stylesheet_uri() );
 	
-
+	wp_enqueue_script( 'bootstrap.min', get_template_directory_uri() . '/js/bootstrap.min.js');
 	wp_enqueue_script( 'jquery-3.2.1.min', get_template_directory_uri() . '/js/jquery-3.2.1.min.js');
 	wp_enqueue_script( 'jquery.mixitup.min', get_template_directory_uri() . '/js/jquery.mixitup.min.js');
 	wp_enqueue_script( 'jquery.fancybox.min', get_template_directory_uri() . '/js/jquery.fancybox.min.js');
-	wp_enqueue_script( 'bootstrap.min', get_template_directory_uri() . '/js/bootstrap.min.js');
 	wp_enqueue_script( 'owl.carousel', get_template_directory_uri() . '/js/owl.carousel.js');
 	wp_enqueue_script( 'typed.min', get_template_directory_uri() . '/js/typed.min.js');
 	wp_enqueue_script( 'menu', get_template_directory_uri() . '/js/menu.js');
@@ -64,7 +65,7 @@ function portfolio(){
 		'menu_position'       => 5,
 		'menu_icon'           => 'dashicons-images-alt', 
 		'hierarchical'        => false,
-		'supports'            => array('title','thumbnail'), // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
+		'supports'            => array('title','editor','thumbnail','custom-fields'), // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
 		'taxonomies'          => array('Web Design','Art Direction','Creative', 'WordPress'),
 		'has_archive'         => false,
 		'rewrite'             => true,
@@ -113,7 +114,7 @@ function register_services(){
 		'menu_position'       => 4,
 		'menu_icon'           => null, 	
 		'hierarchical'        => false,
-		'supports'            => array('title','excerpt'), // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
+		'supports'            => array('title','editor','excerpt'), // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
 		'taxonomies'          => array(),
 		'has_archive'         => false,
 		'rewrite'             => true,
@@ -186,4 +187,28 @@ function register_testimonials(){
 		'query_var'           => true,
 	) );
 }
+function startit_widgets(){
+	register_sidebar( array(
+		'name' => "startit_sidebar",
+		'id' => 'sidebar_resent',
+		'description' => 'Последние записи', 
+		'before_title' => '<h4 class="widget_title"><span>',
+		'after_title' => '</span></h4>'
+	) );
+	register_sidebar( array(
+		'name' => "startit_archive",
+		'id' => 'sidebar_archive',
+		'description' => 'Архив постов', 
+		'before_title' => '<h4 class="widget_title"><span>',
+		'after_title' => '</span></h4>'
+	) );
+	register_sidebar( array(
+		'name' => "startit_category",
+		'id' => 'sidebar_category',
+		'description' => 'Категории постов', 
+		'before_title' => '<h4 class="widget_title"><span>',
+		'after_title' => '</span></h4>'
+	) );
+}
+add_action( 'widgets_init', 'startit_widgets' );
 ?>

@@ -6,47 +6,55 @@
                     <div class="row">
                         <div class="col-md-7 col-lg-8 main-content">
                             <div class="blog-list">
+                                <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
                                 <article class="blog_post post-box">
                                     <div class="post_header">
-                                        <h4 class="post_cat"><?php the_field('category'); ?><a href="blog-single.html#"><?php the_field('title_category'); ?></a></h4>
-                                        <h2 class="post_title"><?php the_field('post_title'); ?></h2>
+                                        <h4 class="post_cat"><a href="<?php the_permalink();?>"><?php the_tags('Category :');?></a></h4>
+                                        <h2 class="post_title"><?php the_title();?></h2>
                                     </div>
                                     <div class="post_img">
-                                        <img src="<?php the_field('post_image'); ?>" alt="img">
+                                        <?php the_post_thumbnail('postimg');?>
                                     </div>
                                     <div class="post_content">
                                         <div class="full_content">
-                                            <p><?php the_field('post_content'); ?></p>
+                                            <?php the_content();?>
                                         </div>
 
                                         <div class="post_footer">
                                             <ul class="post_meta">
-                                                <li><span class="author"><img src="<?php the_field('author_image'); ?>" alt="author"> By <a href="blog-single.html#"><?php the_field('author_name'); ?></a></span></li>
-                                                <li><span class="date"><a href="blog-single.html#"><?php the_field('post_date'); ?></a></span></li>
+                                                <li><span class="author"><?php echo get_avatar('2'); ?>By<a href="<?php the_permalink();?>"><?php the_author()?></a></span></li>
+                                                <li><span class="date"><a href="<?php the_permalink();?>"><?php the_time('j F, Y');?></a></span></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </article>
+                            <?php endwhile;
+                                  endif
+                            ?>
                             </div>
                             
                             <div class="inner_posts">
                             <div class="row">
                                 <div class="col-md-6">
                                 <div class="inner-post prev_post">
-                                    <img src="<?php the_field('prev_image'); ?>" alt="img">
+                                    <?php if ($prev_post = get_previous_post()):?>
+                                    <?php echo get_the_post_thumbnail($prev_post,'prevnext')?>
                                 <div class="post_block">
-                                    <a class="link_to" href="blog-single.html#"><?php the_field('prev_excerpt'); ?></a>
-                                    <h4><a href="blog-single.html#"><?php the_field('prev_excerpt'); ?></a></h4>
+                                    <a class="link_to" href="<?php echo get_permalink($prev_post)?>">Previous post</a>
+                                    <h4><a href="<?php echo get_permalink($prev_post)?>"><?php echo $prev_post->post_title ?></a></h4>
                                 </div>
+                            <?php endif ?>
                                 </div>
                                 </div>
                                 <div class="col-md-6">
                                 <div class="inner-post next_post">
-                                    <img src="<?php the_field('next_image'); ?>" alt="img">
+                                    <?php if ($next_post = get_next_post()):?>
+                                    <?php echo get_the_post_thumbnail($next_post,'prevnext')?>
                                     <div class="post_block">
-                                    <a class="link_to" href="blog-single.html#"><?php the_field('next_excerpt'); ?></a>
-                                    <h4><a href="blog-single.html#"><?php the_field('next_excerpt'); ?></a></h4>
+                                    <a class="link_to" href="<?php echo get_permalink($next_post)?>">Next Post</a>
+                                    <h4><a href="<?php echo get_permalink($next_post)?>"></a><?php echo $next_post->post_title ?></h4>
                                     </div>
+                                <?php endif ?>
                                 </div>
                                 </div>
                             </div>
@@ -65,59 +73,15 @@
                             </div>
 
                             <div id="recent-posts-2" class="widget widget_recent_posts">
-                                <h4 class="widget_title"><span><?php the_field('title_recent'); ?></span></h4>
-                                <div class="sidebar_recent_posts">
-                                    <ul class="recent_posts_list">
-                                        <?php 
-                                if (have_rows('post_list')):
-                                while ( have_rows('post_list') ) : the_row();?>
-                                        <li>
-                                            <img src="<?php the_sub_field('post_img');?>" alt="insta">
-                                            <div class="post_content">
-                                                <h6><a href="blog-single.html#"><?php the_sub_field('title_post');?></a></h6>
-                                                <p class="date"><?php the_sub_field('date_post');?></p>
-                                            </div>
-                                        </li>
-                                        <?php 
-                                            endwhile;
-                                            endif;
-                                        ?>
-                                    </ul>
-                                </div>
+                                <?php dynamic_sidebar('sidebar_resent')?>
                             </div>
 
                             <div id="archives-1" class="widget widget_archive">
-                                <h4 class="widget_title"><span><?php the_field('title_archive');?></span></h4>
-                                <div class="sidebar_archive">
-                                    <ul class="archive_list">
-                                        <?php 
-                                if (have_rows('archive_list')):
-                                while ( have_rows('archive_list') ) : the_row();?>
-                                        <li><a href="blog-single.html#"><?php the_sub_field('archive_text');?></a></li>
-                                        <?php 
-                                            endwhile;
-                                            endif;
-                                        ?>
-                                    </ul>
-                                </div>
+                                <?php dynamic_sidebar('sidebar_archive')?> 
                             </div>
-
                             <div id="categories-2" class="widget widget_categories">
-                                <h4 class="widget_title"><span><?php the_field('title_cat');?></span></h4>
-                                <div class="sidebar_categories">
-                                    <ul class="category_list">
-                                        <?php 
-                                if (have_rows('category_list')):
-                                while ( have_rows('category_list') ) : the_row();?>
-                                        <li><a href="blog-single.html#"><?php the_sub_field('text_category');?><span><?php the_sub_field('qty_category');?></span></a></li>
-                                        <?php 
-                                            endwhile;
-                                            endif;
-                                        ?>
-                                    </ul>
-                                </div>
+                                <?php dynamic_sidebar('sidebar_category')?>
                             </div>
-
                         </div>
                     </div>
                 </div>
